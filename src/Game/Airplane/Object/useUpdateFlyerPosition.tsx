@@ -5,7 +5,16 @@ interface MousePosition {
   y: number;
 }
 
-const useUpdateFlyerPosition = (flyerRef: RefObject<HTMLDivElement>) => {
+interface WindowDimensions {
+  width: number;
+  height: number;
+}
+
+
+const useUpdateFlyerPosition = (
+  flyerRef: RefObject<HTMLDivElement>,
+  windowDimensions: WindowDimensions
+  ) => {
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -15,9 +24,10 @@ const useUpdateFlyerPosition = (flyerRef: RefObject<HTMLDivElement>) => {
       const { top, bottom } = flyer.getBoundingClientRect();
 
       const flyerHeight = bottom - top;
+      const { height } = windowDimensions;
 
       const targetY = mousePosition.y - flyerHeight;
-      const newY = targetY > 0 ? targetY : 0;
+      const newY = Math.min(Math.max(targetY, 0), height - flyerHeight);
 
       flyer.style.transform = `translateY(${newY}px)`;
     }
