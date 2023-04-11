@@ -13,21 +13,24 @@ interface WindowDimensions {
 
 const useUpdateFlyerPosition = (
   flyerRef: RefObject<HTMLDivElement>,
-  windowDimensions: WindowDimensions
+  worldHeight: number
   ) => {
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
 
   useEffect(() => {
     const flyer = flyerRef.current;
-
     if (flyer) {
       const { top, bottom } = flyer.getBoundingClientRect();
 
       const flyerHeight = bottom - top;
-      const { height } = windowDimensions;
 
       const targetY = mousePosition.y - flyerHeight;
-      const newY = Math.min(Math.max(targetY, 0), height - flyerHeight);
+/*       console.log('world height: ' + worldHeight);
+      console.log('flyer height: ' + flyerHeight);
+      console.log('mouse y: ' + mousePosition.y);
+      console.log('targetY: ' + targetY); */
+      const newY = Math.min(0, Math.max(targetY, flyerHeight*1.375) - worldHeight);
+      //console.log('newY: ' + newY);
 
       flyer.style.transform = `translateY(${newY}px)`;
     }

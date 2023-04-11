@@ -3,9 +3,13 @@ import cartoonAirplane from './cartoonAirplane.png';
 import styles from './Flyer.module.scss';
 import useUpdateFlyerPosition from './useUpdateFlyerPosition';
 
-export default function Flyer() {
+interface FlyerProps {
+    worldHeight: number;
+  }
+
+export default function Flyer({ worldHeight }: FlyerProps) {
   const flyerRef = useRef<HTMLDivElement>(null);
-  const updateFlyerPosition = useUpdateFlyerPosition(flyerRef);
+  const updateFlyerPosition = useUpdateFlyerPosition(flyerRef, worldHeight);
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
