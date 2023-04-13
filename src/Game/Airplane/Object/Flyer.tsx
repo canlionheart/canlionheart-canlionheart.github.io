@@ -1,32 +1,49 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import cartoonAirplane from './cartoonAirplane.png';
 import styles from './Flyer.module.scss';
-import useUpdateFlyerPosition from './useUpdateFlyerPosition';
 
 interface FlyerProps {
     worldHeight: number;
   }
 
 export default function Flyer({ worldHeight }: FlyerProps) {
+  const speed = 16;
   const flyerRef = useRef<HTMLDivElement>(null);
-  const updateFlyerPosition = useUpdateFlyerPosition(flyerRef, worldHeight);
-
   const [currentY, setCurrentY] = useState(0);
 
-  const speed = 16;
+  //
+  const updateFlyerPosition = function(mouseY: number) {
+
+    if (flyerRef) {
+      const { top, bottom } = flyerRef.current!.getBoundingClientRect();
+    
+      const flyerHeight = bottom - top;
+  
+      const targetY = mouseY - flyerHeight;
+      console.log('world height: ' + worldHeight);
+        
+      console.log('flyer height: ' + flyerHeight);
+      console.log('mouse y: ' + mouseY);
+      console.log('targetY: ' + targetY);
+      const newY = Math.min(0, Math.max(targetY, flyerHeight*1.375) - worldHeight);
+      //console.log('newY: ' + newY);
+  
+      flyerRef.current!.style.transform = `translateY(${newY}px)`;
+    }
+  }
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      updateFlyerPosition(event);
+      updateFlyerPosition(event.clientY);
     };
 
     document.addEventListener('mousemove', handleMouseMove);
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [updateFlyerPosition]);
+  }, [updateFlyerPosition, worldHeight]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     let intervalId: NodeJS.Timeout;
 
     const moveFlyer = () => {
@@ -44,7 +61,7 @@ export default function Flyer({ worldHeight }: FlyerProps) {
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentY, speed, worldHeight]);
+  }, [currentY, speed, worldHeight]); */
 
   const style = {};
 
