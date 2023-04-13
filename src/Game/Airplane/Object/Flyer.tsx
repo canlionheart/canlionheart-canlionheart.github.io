@@ -43,7 +43,8 @@ export default function Flyer({ worldHeight }: FlyerProps) {
     };
   }, [updateFlyerPosition, worldHeight]);
 
-/*   useEffect(() => {
+  /*
+  useEffect(() => {
     let intervalId: NodeJS.Timeout;
 
     const moveFlyer = () => {
@@ -61,7 +62,8 @@ export default function Flyer({ worldHeight }: FlyerProps) {
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentY, speed, worldHeight]); */
+  }, [currentY, speed, worldHeight]);
+*/
 
   const style = {};
 
