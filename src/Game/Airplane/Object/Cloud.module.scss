@@ -1,0 +1,25 @@
+@keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+.cloud {
+    position:absolute;
+    width:auto;
+    height:15vh;
+    top:5%;
+    right:-22vh;
+    img {
+        height:100%;
+        width:100%;
+    }
+
+      /* Position the child component off-screen to the right initially */
+    transform: translateX(100%);
+    /* Apply the animation */
+    animation: scroll-left 5s linear;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import cartoonAirplane from './cartoonAirplane.png';
+import cartoonAirplane from '../Sprite/Player/cartoonAirplane.png';
 import styles from './Flyer.module.scss';
 
 interface FlyerProps {
@@ -55,7 +55,7 @@ export default function Flyer({ worldHeight }: FlyerProps) {
       const distanceToTarget = targetY - currentYPos;
       const direction = targetY > currentYPos ? 1 : -1; // Determine direction of movement
       var rotation = 0;
-      if (Math.abs(distanceToTarget) >= flyerHeight/4) {
+      if (Math.abs(distanceToTarget) >= flyerHeight/3) {
         rotation = direction > 0 ? 20 : -20; // Set rotation based on direction
       }
       const delta = (targetY - currentYPos) * speed / 1000; // in pixels
