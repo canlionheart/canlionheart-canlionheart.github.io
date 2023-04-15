@@ -1,9 +1,10 @@
 .player {
     position:absolute;
     bottom:5%;
-    left:40%;
+    left:33.333%;
     width:auto;
     height:15vh;
+    z-index: 1;
     img {
         height:100%;
         width:100%;

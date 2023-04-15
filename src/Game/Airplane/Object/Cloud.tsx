@@ -5,14 +5,13 @@ import {WorldObj} from './WorldObj';
 
 
 
-export default function Cloud({ index, onRemove } : WorldObj) {
+export default function Cloud({ id, onRemove } : WorldObj) {
 
     const speed = 8;
-    const [isOffscreen, setIsOffscreen] = useState(false);
     
     useEffect(() => {
         setTimeout(() => {
-          setIsOffscreen(true);
+          onRemove();
         }, 5000);
       }, []);
 

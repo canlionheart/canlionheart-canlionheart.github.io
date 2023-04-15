@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { WorldObj } from "../Object/WorldObj";
 
-function useWorldObjs(): [WorldObj[], (obj: WorldObj) => void, (index: number) => void] {
+
+function useWorldObjs(): [WorldObj[], (obj: WorldObj) => void, (id: number) => void] {
   const [worldObjs, setWorldObjs] = useState<WorldObj[]>([]);
 
-  function addWorldObj() {
+  function addWorldObj(objToAdd: WorldObj) {
     setWorldObjs(prevWorldObjs => [...prevWorldObjs, 
-        {
-            index: prevWorldObjs.length,
-            onRemove: () => removeComponent(prevWorldObjs.length)
-        }
+        objToAdd
     ]);
   }
 
-  function removeComponent(index: number) {
+  function removeComponent(id: number) {
     setWorldObjs(prevWorldObjs =>
-      prevWorldObjs.filter(worldObj => worldObj.index !== index)
+      prevWorldObjs.filter(worldObj => worldObj.id !== id)
     );
   }
 

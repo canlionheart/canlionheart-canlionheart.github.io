@@ -1,4 +1,4 @@
 export interface WorldObj {
-    index: number;
+    id: number;
     onRemove: Function;
   }

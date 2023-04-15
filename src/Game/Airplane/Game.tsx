@@ -6,6 +6,7 @@ import Cloud from './Object/Cloud';
 import { WorldObj } from './Object/WorldObj';
 import { JsxElement } from 'typescript';
 import useWorldObjs from './Hook/useWorldObjs';
+import { randomUUID } from 'crypto';
 
 export default function GameAirplane() {
     const flyerRef = useRef<HTMLDivElement>(null);
@@ -22,8 +23,14 @@ export default function GameAirplane() {
 
       useEffect(() => {
         const intervalId = setInterval(() => {
-          addWorldObj();
-        }, 5000);
+          let newid = Date.now();
+          addWorldObj(
+            {
+              id: newid,
+              onRemove: () => removeComponent(newid)
+          }
+          );
+        }, 333);
     
         return () => clearInterval(intervalId);
       }, []);
@@ -34,8 +41,9 @@ export default function GameAirplane() {
             <Flyer worldHeight={worldHeight}/>
             {worldObjs.map((worldObj) => (
                 <Cloud
-                index={worldObj.index}
-                onRemove={() => worldObj.onRemove()}
+                key={worldObj.id}
+                id={worldObj.id}
+                onRemove={() => removeComponent(worldObj.id)}
                 />
             ))}
         </div>
