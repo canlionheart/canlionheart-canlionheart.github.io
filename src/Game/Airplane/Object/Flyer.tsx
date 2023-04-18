@@ -12,6 +12,8 @@ export default function Flyer({ worldHeight }: FlyerProps) {
   const [targetY, setTargetY] = useState(0);
   const [flyerHeight, setFlyerHeight] = useState(0);
 
+  const style = {};
+
   //
   const updateFlyerPosition = function(mouseY: number) {
 
@@ -69,9 +71,6 @@ export default function Flyer({ worldHeight }: FlyerProps) {
       clearInterval(intervalId);
     };
   }, [targetY, speed, worldHeight]);
-
-
-  const style = {};
 
   return (
     <div className={styles.player} style={style} ref={flyerRef}>

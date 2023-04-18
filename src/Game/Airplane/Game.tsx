@@ -30,7 +30,7 @@ export default function GameAirplane() {
               onRemove: () => removeComponent(newid)
           }
           );
-        }, 333);
+        }, 1000);
     
         return () => clearInterval(intervalId);
       }, []);
