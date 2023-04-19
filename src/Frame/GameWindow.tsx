@@ -1,5 +1,4 @@
 
-import './GameWindow.scss';
 import '../Game/Game.scss';
 
 import GameAirplane from '../Game/Airplane/Game';

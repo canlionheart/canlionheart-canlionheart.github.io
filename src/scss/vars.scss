@@ -1,0 +1,12 @@
+$phone-w: 568px;
+$tablet: 768px;
+$tablet-w: 1024px;
+$desktop: 1280px;
+$desktop-big: 1600px;
+
+// Mixins
+@mixin device($device-width) {
+    @media screen and (min-width: $device-width) {
+        @content;
+    }
+}
